@@ -1,17 +1,14 @@
-/* ── Vercel Serverless Function · api/analyze.js ──
-   Проксирует запросы к Anthropic API.
-   API-ключ хранится только на сервере в переменной окружения.
-── */
+// Vercel Serverless Function — CommonJS
+// Проксирует запросы к Anthropic API, ключ хранится только на сервере.
 
-export default async function handler(req, res) {
-  /* Только POST */
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: 'API key not configured on server' });
+    return res.status(500).json({ error: 'ANTHROPIC_API_KEY not set on server' });
   }
 
   try {
@@ -31,4 +28,4 @@ export default async function handler(req, res) {
     console.error('Anthropic API error:', err);
     return res.status(502).json({ error: 'Failed to reach Anthropic API' });
   }
-}
+};
