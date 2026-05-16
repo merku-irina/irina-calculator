@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Тип внешности — Метод Кибби</title>
+  <meta name="description" content="Определите свой тип внешности по методу Кибби. AI-анализ фотографий и уточняющие вопросы." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HERO — тёмный зелёный -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="overline">Style Analysis — Метод Кибби</div>
+        <h1 class="h1">Тип<br><em>внешности</em></h1>
+        <p class="hero-p">Загрузите два фото и ответьте на три вопроса — получите глубокий анализ по методу Кибби с рекомендациями по стилю и цветовой палитрой.</p>
+        <div class="hero-chips">
+          <span class="hchip"><i class="ti ti-gender-bigender" aria-hidden="true"></i>Для женщин и мужчин</span>
+          <span class="hchip"><i class="ti ti-sparkles" aria-hidden="true"></i>AI-анализ</span>
+          <span class="hchip"><i class="ti ti-clock" aria-hidden="true"></i>~1 минута</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- INFO -->
+    <section class="info-grid">
+      <div class="info-cell">
+        <div class="cell-num">01</div>
+        <div class="cell-title">Зачем это знать</div>
+        <ul class="cell-list">
+          <li>Найти свой стиль — не чужой и не трендовый</li>
+          <li>Понять, почему одни вещи работают, а другие нет</li>
+          <li>Тратить деньги только на то, что носится</li>
+          <li>Одеваться уверенно каждый день</li>
+          <li>Иметь базу для работы со стилистом</li>
+        </ul>
+      </div>
+      <div class="info-cell">
+        <div class="cell-num">02</div>
+        <div class="cell-title">Метод Кибби</div>
+        <p class="cell-p">В 1987 году стилист Дэвид Кибби предложил смотреть не на «геометрию тела», а на <strong>целостный образ</strong> — линии костей, черты лица, текстуру.</p>
+        <p class="cell-p">Тип не меняется с возрастом — он про структуру. Поэтому работает всегда и точно.</p>
+      </div>
+    </section>
+
+    <!-- MAIN FORM -->
+    <main id="main-section">
+
+      <div class="section-label">Фотографии</div>
+
+      <div class="upload-grid">
+        <div class="upload-wrap">
+          <div class="upload-box" id="box1" role="button" tabindex="0" aria-label="Загрузить фото в полный рост">
+            <div class="upload-svg">
+              <svg width="50" height="92" viewBox="0 0 56 100" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="28" cy="11" rx="8" ry="10"/>
+                <path d="M9 34 Q18 29 28 28 Q38 29 47 34"/>
+                <line x1="11" y1="34" x2="9" y2="62"/><line x1="45" y1="34" x2="47" y2="62"/>
+                <line x1="17" y1="62" x2="28" y2="65"/><line x1="39" y1="62" x2="28" y2="65"/>
+                <line x1="21" y1="65" x2="19" y2="94"/><line x1="35" y1="65" x2="37" y2="94"/>
+                <line x1="9" y1="34" x2="5" y2="58"/><line x1="47" y1="34" x2="51" y2="58"/>
+              </svg>
+              <span class="upload-svg-label">Полный рост</span>
+            </div>
+            <img class="upload-prev" id="prev1" alt="" />
+            <div class="upload-info">
+              <div class="upload-num">01</div>
+              <div>
+                <div class="upload-title">Фото в полный рост</div>
+                <div class="upload-hint">нажмите чтобы загрузить</div>
+              </div>
+            </div>
+          </div>
+          <ul class="req-list">
+            <li>Прямо, в полный рост</li>
+            <li>Леггинсы + топ или купальник</li>
+            <li>Нейтральный фон, хорошее освещение</li>
+          </ul>
+          <input type="file" id="f1" accept="image/*" />
+        </div>
+
+        <div class="upload-wrap">
+          <div class="upload-box" id="box2" role="button" tabindex="0" aria-label="Загрузить фото лица">
+            <div class="upload-svg">
+              <svg width="64" height="84" viewBox="0 0 72 92" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="36" cy="46" rx="26" ry="34"/>
+                <path d="M14 30 Q22 25 30 28"/><path d="M42 28 Q50 25 58 30"/>
+                <ellipse cx="25" cy="41" rx="7" ry="5"/><ellipse cx="47" cy="41" rx="7" ry="5"/>
+                <circle cx="25" cy="41" r="2.5" fill="currentColor" stroke="none"/>
+                <circle cx="47" cy="41" r="2.5" fill="currentColor" stroke="none"/>
+                <path d="M36 50 L31 61 Q36 64 41 61"/>
+                <path d="M27 71 Q36 77 45 71"/>
+              </svg>
+              <span class="upload-svg-label">Лицо анфас</span>
+            </div>
+            <img class="upload-prev" id="prev2" alt="" />
+            <div class="upload-info">
+              <div class="upload-num">02</div>
+              <div>
+                <div class="upload-title">Фото лица крупно</div>
+                <div class="upload-hint">нажмите чтобы загрузить</div>
+              </div>
+            </div>
+          </div>
+          <ul class="req-list">
+            <li>Анфас, дневной свет</li>
+            <li>Волосы убраны, без теней</li>
+            <li>Без макияжа или лёгкий</li>
+          </ul>
+          <input type="file" id="f2" accept="image/*" />
+        </div>
+      </div>
+
+      <!-- QUESTIONS -->
+      <div class="section-label" style="margin-top:2.5rem">Три вопроса</div>
+      <p class="section-desc">Ответы уточняют анализ — по фото сложно оценить рост и ощущение пропорций.</p>
+
+      <div class="questions">
+        <div class="q-block">
+          <div class="q-label">01 — Ваш рост</div>
+          <div class="q-opts" data-q="q1">
+            <button class="qbtn" data-v="до 160 см"><i class="ti ti-check qcheck" aria-hidden="true"></i>до 160 см</button>
+            <button class="qbtn" data-v="160–170 см"><i class="ti ti-check qcheck" aria-hidden="true"></i>160–170 см</button>
+            <button class="qbtn" data-v="170–178 см"><i class="ti ti-check qcheck" aria-hidden="true"></i>170–178 см</button>
+            <button class="qbtn" data-v="выше 178 см"><i class="ti ti-check qcheck" aria-hidden="true"></i>выше 178 см</button>
+          </div>
+        </div>
+        <div class="q-block">
+          <div class="q-label">02 — Как вы себя ощущаете в пространстве</div>
+          <div class="q-opts" data-q="q2">
+            <button class="qbtn" data-v="компактной и лёгкой"><i class="ti ti-check qcheck" aria-hidden="true"></i>компактной и лёгкой</button>
+            <button class="qbtn" data-v="средней, гармоничной"><i class="ti ti-check qcheck" aria-hidden="true"></i>средней, гармоничной</button>
+            <button class="qbtn" data-v="крупной и заметной"><i class="ti ti-check qcheck" aria-hidden="true"></i>крупной и заметной</button>
+            <button class="qbtn" data-v="вытянутой и угловатой"><i class="ti ti-check qcheck" aria-hidden="true"></i>вытянутой и угловатой</button>
+          </div>
+        </div>
+        <div class="q-block">
+          <div class="q-label">03 — Черты лица</div>
+          <div class="q-opts" data-q="q3">
+            <button class="qbtn" data-v="мягкие и округлые"><i class="ti ti-check qcheck" aria-hidden="true"></i>мягкие и округлые</button>
+            <button class="qbtn" data-v="правильные и симметричные"><i class="ti ti-check qcheck" aria-hidden="true"></i>правильные и симметричные</button>
+            <button class="qbtn" data-v="острые и выразительные"><i class="ti ti-check qcheck" aria-hidden="true"></i>острые и выразительные</button>
+            <button class="qbtn" data-v="смешанные"><i class="ti ti-check qcheck" aria-hidden="true"></i>смешанные</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="errmsg" id="errmsg"></p>
+      <button class="main-btn" id="gobtn" disabled>
+        <i class="ti ti-sparkles" aria-hidden="true"></i>
+        Определить тип внешности
+      </button>
+    </main>
+
+    <!-- LOADING -->
+    <div class="loading" id="ldiv">
+      <div class="loading-inner">
+        <div class="spinner"></div>
+        <div class="loading-text" id="loading-text">Анализируем линии вашего тела…</div>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <section class="result" id="rdiv">
+      <div class="res-eyebrow">Ваш тип</div>
+      <h2 class="res-title" id="rname"></h2>
+      <p class="res-sub" id="rsub"></p>
+
+      <div class="res-card">
+        <div class="res-card-label">01 — Детальный анализ</div>
+        <div class="analysis-grid" id="ranalysis"></div>
+      </div>
+
+      <div class="res-card">
+        <div class="res-card-label">02 — Ваши стили</div>
+        <div class="style-tags" id="rstyle-names"></div>
+        <div class="res-rule"></div>
+        <ul class="res-list" id="rstyle"></ul>
+      </div>
+
+      <div class="res-card">
+        <div class="res-card-label">03 — Цветовая палитра</div>
+        <p class="res-card-desc" id="rpalette-desc"></p>
+        <div class="palette" id="rpalette"></div>
+      </div>
+
+      <div class="res-card">
+        <div class="res-card-label">04 — Референсы на Pinterest</div>
+        <div class="refs-grid" id="rrefs"></div>
+      </div>
+
+      <div class="res-card res-card-avoid">
+        <div class="res-card-label">05 — Лучше избегать</div>
+        <ul class="res-list" id="ravoid"></ul>
+      </div>
+
+      <div class="res-card">
+        <div class="res-card-label">06 — Знаменитости вашего типа</div>
+        <div class="celebs-grid" id="rcelebs"></div>
+      </div>
+
+      <a class="pdf-link" href="kibbe_types_guide.pdf" target="_blank" rel="noopener">
+        <div class="pdf-icon"><i class="ti ti-file-text" aria-hidden="true"></i></div>
+        <div class="pdf-text">
+          <div class="pdf-title">Гид по всем типам Кибби</div>
+          <div class="pdf-desc">PDF — все 6 типов, рекомендации, примеры</div>
+        </div>
+        <i class="ti ti-arrow-up-right" aria-hidden="true" style="font-size:16px;opacity:.4"></i>
+      </a>
+
+      <button class="reset-btn" id="resetbtn">← начать заново</button>
+    </section>
+
+  </div>
+</div>
+
+<script>
+const files = {};
+const answers = {};
+const IS_LOCAL = location.protocol === 'file:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+
+function getLocalApiKey() {
+  let key = localStorage.getItem('kibbe_api_key');
+  if (!key) {
+    key = prompt('Для локального тестирования введите Anthropic API-ключ.\n\nПолучить: console.anthropic.com → API Keys');
+    if (key && key.trim()) localStorage.setItem('kibbe_api_key', key.trim());
+  }
+  return key ? key.trim() : null;
+}
+
+function setupBox(n) {
+  const box = document.getElementById('box' + n);
+  const input = document.getElementById('f' + n);
+  box.addEventListener('click', () => input.click());
+  box.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); } });
+  input.addEventListener('change', function() {
+    const file = this.files[0];
+    if (!file) return;
+    files[n] = file;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const prev = document.getElementById('prev' + n);
+      prev.src = e.target.result;
+      prev.style.display = 'block';
+      box.classList.add('ready');
+    };
+    reader.readAsDataURL(file);
+    updateBtn();
+  });
+}
+
+document.querySelectorAll('.q-opts').forEach(group => {
+  group.querySelectorAll('.qbtn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      group.querySelectorAll('.qbtn').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      answers[group.dataset.q] = btn.dataset.v;
+      updateBtn();
+    });
+  });
+});
+
+function updateBtn() {
+  const ready = files[1] && files[2] && answers.q1 && answers.q2 && answers.q3;
+  document.getElementById('gobtn').disabled = !ready;
+}
+
+function toBase64(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result.split(',')[1]);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+}
+
+const LOADING_MSGS = [
+  'Анализируем линии вашего тела…',
+  'Изучаем черты лица…',
+  'Определяем баланс ян и инь…',
+  'Подбираем тип по Кибби…',
+  'Формируем рекомендации по стилю…',
+  'Подбираем цветовую палитру…',
+  'Ищем знаменитостей вашего типа…',
+];
+let loadingTimer = null;
+
+function startLoading() {
+  let i = 0;
+  const el = document.getElementById('loading-text');
+  el.textContent = LOADING_MSGS[0];
+  loadingTimer = setInterval(() => {
+    i = (i + 1) % LOADING_MSGS.length;
+    el.style.opacity = '0';
+    setTimeout(() => { el.textContent = LOADING_MSGS[i]; el.style.opacity = '1'; }, 300);
+  }, 2500);
+}
+
+function stopLoading() { clearInterval(loadingTimer); }
+
+async function analyze() {
+  document.getElementById('errmsg').textContent = '';
+  document.getElementById('main-section').style.display = 'none';
+  document.getElementById('ldiv').classList.add('on');
+  startLoading();
+
+  try {
+    const [d1, d2] = await Promise.all([toBase64(files[1]), toBase64(files[2])]);
+
+    const systemPrompt = `Ты — эксперт по системе типов внешности Дэвида Кибби.
+
+МЕТОДОЛОГИЯ — оцени последовательно:
+1. КОСТИ: рост и масштаб, плечи (широкие/узкие, острые/покатые), длина конечностей
+2. СИЛУЭТ: талия (выраженная/умеренная/прямая), бёдра, общая форма
+3. ЧЕРТЫ ЛИЦА: контур (острый/округлый), скулы, нос, глаза, губы
+
+ТИПЫ:
+- Dramatic: ян+++ — высокий рост, острые угловатые черты, прямой силуэт
+- Soft Dramatic: ян+инь — высокий рост + изгибы, яркие черты с округлостью
+- Natural: умеренный ян — средний/высокий рост, широкие прямые плечи, открытые черты
+- Classic: баланс — средний рост, симметричные правильные черты, умеренная талия
+- Gamine: контраст в малом масштабе — небольшой рост, острые+мягкие черты вместе
+- Romantic: инь+++ — небольшой/средний рост, мягкие округлые черты, выраженные изгибы
+
+Учти данные из анкеты. Отвечай ТОЛЬКО в JSON без markdown:
+{
+  "type": "один из: Dramatic / Soft Dramatic / Natural / Classic / Gamine / Romantic",
+  "type_ru": "русское название",
+  "subtitle": "1 тёплое предложение о сути типа",
+  "analysis": [
+    {"label": "Кости и рост", "text": "наблюдение"},
+    {"label": "Силуэт тела", "text": "наблюдение"},
+    {"label": "Черты лица", "text": "наблюдение"},
+    {"label": "Ян / Инь баланс", "text": "итоговый вывод"}
+  ],
+  "style_names": ["Стиль 1", "Стиль 2", "Стиль 3"],
+  "style": ["рек 1", "рек 2", "рек 3", "рек 4", "рек 5"],
+  "palette_desc": "1 предложение о вашей палитре",
+  "avoid": ["избегать 1", "избегать 2", "избегать 3", "избегать 4"],
+  "celebs": [
+    {"name": "English First Last", "note": "actress"},
+    {"name": "English First Last", "note": "singer"},
+    {"name": "English First Last", "note": "actor"},
+    {"name": "English First Last", "note": "musician"},
+    {"name": "English First Last", "note": "model"}
+  ]
+}`;
+
+    const requestBody = {
+      model: 'claude-sonnet-4-6',
+      max_tokens: 1800,
+      system: systemPrompt,
+      messages: [{
+        role: 'user',
+        content: [
+          { type: 'image', source: { type: 'base64', media_type: files[1].type || 'image/jpeg', data: d1 } },
+          { type: 'image', source: { type: 'base64', media_type: files[2].type || 'image/jpeg', data: d2 } },
+          { type: 'text', text: 'Определи мой тип внешности по Кибби.\nДанные анкеты:\n- Рост: ' + answers.q1 + '\n- Ощущение в пространстве: ' + answers.q2 + '\n- Черты лица: ' + answers.q3 },
+        ],
+      }],
+    };
+
+    let response;
+    if (IS_LOCAL) {
+      const apiKey = getLocalApiKey();
+      if (!apiKey) {
+        stopLoading();
+        document.getElementById('ldiv').classList.remove('on');
+        document.getElementById('main-section').style.display = '';
+        document.getElementById('errmsg').textContent = 'API-ключ не введён.';
+        return;
+      }
+      response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+        body: JSON.stringify(requestBody),
+      });
+      if (response.status === 401 || response.status === 403) localStorage.removeItem('kibbe_api_key');
+    } else {
+      response = await fetch('/api/analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody),
+      });
+    }
+
+    const json = await response.json();
+    if (!response.ok) throw new Error(json.error?.message || 'api_error');
+    const raw = json.content.map(i => i.text || '').join('');
+    const result = JSON.parse(raw.replace(/```json|```/g, '').trim());
+    stopLoading();
+    renderResult(result);
+
+  } catch (err) {
+    console.error(err);
+    stopLoading();
+    document.getElementById('ldiv').classList.remove('on');
+    document.getElementById('main-section').style.display = '';
+    document.getElementById('errmsg').textContent = 'Что-то пошло не так — попробуйте ещё раз.';
+  }
+}
+
+const PALETTES = {
+  'Dramatic':      [{c:'#1A1A1A',n:'Чёрный'},{c:'#FAFAF8',n:'Белый'},{c:'#6B0F0F',n:'Алый'},{c:'#1A1A4A',n:'Полночь'},{c:'#1A3A1A',n:'Хвойный'},{c:'#4A4A4A',n:'Антрацит'},{c:'#8B8B8B',n:'Стальной'},{c:'#D4C5A9',n:'Слоновая'}],
+  'Soft Dramatic': [{c:'#5C1F2E',n:'Бордо'},{c:'#1B4332',n:'Изумруд'},{c:'#7B5E1E',n:'Золото'},{c:'#1A2F4A',n:'Сапфир'},{c:'#4A1A3A',n:'Слива'},{c:'#2C1A1A',n:'Тёмный шок'},{c:'#8B3A3A',n:'Терракот'},{c:'#F0EAD6',n:'Крем'}],
+  'Natural':       [{c:'#7A6244',n:'Хаки'},{c:'#5C3317',n:'Терракот'},{c:'#4A5E2A',n:'Оливковый'},{c:'#C4A882',n:'Беж'},{c:'#6B8C6B',n:'Шалфей'},{c:'#8B5E3C',n:'Сиена'},{c:'#E8D5B0',n:'Пшеница'},{c:'#3A3A1A',n:'Тёмная олива'}],
+  'Classic':       [{c:'#2A2A2A',n:'Антрацит'},{c:'#F5F5F0',n:'Белый'},{c:'#8A8A78',n:'Серо-беж'},{c:'#1A2E4A',n:'Тёмно-синий'},{c:'#5C3A1A',n:'Коричневый'},{c:'#C8B89A',n:'Тёплый беж'},{c:'#5A5A5A',n:'Серый'},{c:'#6B0F0F',n:'Бордо'}],
+  'Gamine':        [{c:'#D42B2B',n:'Красный'},{c:'#1A1A1A',n:'Чёрный'},{c:'#FAFAF8',n:'Белый'},{c:'#E8C000',n:'Жёлтый'},{c:'#0055AA',n:'Синий'},{c:'#E07030',n:'Оранжевый'},{c:'#1A5C3A',n:'Зелёный'},{c:'#7B3FA0',n:'Фиолет'}],
+  'Romantic':      [{c:'#E8A0A8',n:'Розовый'},{c:'#F0D5C0',n:'Персик'},{c:'#C8A0CC',n:'Сирень'},{c:'#E0C0B8',n:'Пудровый'},{c:'#B8888C',n:'Мокко-роза'},{c:'#E8D8E8',n:'Лаванда'},{c:'#F5E8D8',n:'Кремовый'},{c:'#A06870',n:'Пыльная роза'}],
+};
+
+function renderResult(r) {
+  document.getElementById('ldiv').classList.remove('on');
+  document.getElementById('rname').textContent = r.type + ' — ' + r.type_ru;
+  document.getElementById('rsub').textContent = r.subtitle;
+
+  document.getElementById('ranalysis').innerHTML = (r.analysis || []).map(a =>
+    '<div class="analysis-block"><div class="analysis-label">' + a.label + '</div><div class="analysis-text">' + a.text + '</div></div>'
+  ).join('');
+
+  document.getElementById('rstyle-names').innerHTML = (r.style_names || []).map(s =>
+    '<span class="style-tag">' + s + '</span>'
+  ).join('');
+
+  document.getElementById('rstyle').innerHTML = (r.style || []).map(s =>
+    '<li><span>' + s + '</span></li>'
+  ).join('');
+
+  document.getElementById('rpalette-desc').textContent = r.palette_desc || '';
+  const swatches = PALETTES[r.type] || PALETTES['Classic'];
+  document.getElementById('rpalette').innerHTML = swatches.map(s =>
+    '<div class="swatch-wrap"><div class="swatch" style="background:' + s.c + '"></div><div class="swatch-name">' + s.n + '</div></div>'
+  ).join('');
+
+  const slug = r.type.toLowerCase().replace(/ /g, '+') + '+kibbe';
+  const pins = [
+    { title: 'Вечерний образ',   q: slug + '+evening+outfit',  icon: 'ti-moon'      },
+    { title: 'Деловой образ',    q: slug + '+work+outfit',      icon: 'ti-briefcase' },
+    { title: 'Повседневный',     q: slug + '+casual+outfit',    icon: 'ti-sun'       },
+    { title: 'Романтический',    q: slug + '+romantic+dress',   icon: 'ti-heart'     },
+    { title: 'Зимний образ',     q: slug + '+winter+outfit',    icon: 'ti-snowflake' },
+    { title: 'Цветовая палитра', q: slug + '+color+palette',    icon: 'ti-palette'   },
+  ];
+  document.getElementById('rrefs').innerHTML = pins.map(p =>
+    '<a class="pin-card" href="https://www.pinterest.com/search/pins/?q=' + p.q + '" target="_blank" rel="noopener">' +
+    '<div class="pin-top"><div class="pin-icon"><i class="ti ' + p.icon + '" aria-hidden="true"></i></div>' +
+    '<div class="pin-query">' + p.q.replace(/\+/g, ' ') + '</div></div>' +
+    '<div class="pin-bottom"><span class="pin-title">' + p.title + '</span>' +
+    '<i class="ti ti-arrow-up-right" aria-hidden="true" style="color:#E60023;font-size:13px"></i></div></a>'
+  ).join('');
+
+  document.getElementById('ravoid').innerHTML = (r.avoid || []).map(a =>
+    '<li><span>' + a + '</span></li>'
+  ).join('');
+
+  document.getElementById('rcelebs').innerHTML = (r.celebs || []).map((c, i) =>
+    '<div class="celeb-card"><div class="celeb-avatar" id="ca' + i + '"><i class="ti ti-user" aria-hidden="true"></i></div>' +
+    '<div class="celeb-name">' + c.name.replace(/\(.*?\)/g, '').trim() + '</div>' +
+    '<div class="celeb-note">' + c.note + '</div></div>'
+  ).join('');
+
+  (r.celebs || []).forEach((c, i) => {
+    const name = c.name.replace(/\(.*?\)/g, '').trim().replace(/ /g, '_');
+    fetch('https://en.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(name))
+      .then(res => res.json())
+      .then(data => {
+        const thumb = data.thumbnail && data.thumbnail.source;
+        if (!thumb) return;
+        const el = document.getElementById('ca' + i);
+        if (el) el.innerHTML = '<img src="' + thumb + '" alt="' + c.name + '" />';
+      })
+      .catch(function() {});
+  });
+
+  document.getElementById('rdiv').classList.add('on');
+  document.getElementById('rdiv').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function reset() {
+  [1, 2].forEach(n => {
+    files[n] = null;
+    document.getElementById('box' + n).classList.remove('ready');
+    const prev = document.getElementById('prev' + n);
+    prev.src = '';
+    prev.style.display = 'none';
+    document.getElementById('f' + n).value = '';
+  });
+  delete answers.q1; delete answers.q2; delete answers.q3;
+  document.querySelectorAll('.qbtn').forEach(b => b.classList.remove('on'));
+  document.getElementById('rdiv').classList.remove('on');
+  document.getElementById('ldiv').classList.remove('on');
+  document.getElementById('main-section').style.display = '';
+  document.getElementById('errmsg').textContent = '';
+  document.getElementById('gobtn').disabled = true;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  setupBox(1);
+  setupBox(2);
+  document.getElementById('gobtn').addEventListener('click', analyze);
+  document.getElementById('resetbtn').addEventListener('click', reset);
+});
+</script>
+
+</body>
+</html>
