@@ -2,10 +2,6 @@
 
 const files = {};
 
-/* ── Режим работы ──
-   На Vercel (https://) → /api/analyze, ключ живёт на сервере.
-   Локально (file://)   → прямой запрос в Anthropic, ключ вводится один раз.
-── */
 const IS_LOCAL = (
   location.protocol === 'file:' ||
   location.hostname === 'localhost' ||
@@ -15,66 +11,12 @@ const IS_LOCAL = (
 function getLocalApiKey() {
   let key = localStorage.getItem('kibbe_api_key');
   if (!key) {
-    key = prompt(
-      'Для локального тестирования введите Anthropic API-ключ.\n\n' +
-      'Получить: console.anthropic.com → API Keys\n' +
-      'Ключ сохранится в браузере — вводить повторно не нужно.'
-    );
+    key = prompt('Для локального тестирования введите Anthropic API-ключ.\n\nПолучить: console.anthropic.com → API Keys');
     if (key && key.trim()) localStorage.setItem('kibbe_api_key', key.trim());
   }
   return key ? key.trim() : null;
 }
 
-/* ── Draw placeholder example images on canvas ── */
-function drawExample(canvasId, mode) {
-  const canvas = document.getElementById(canvasId);
-  if (!canvas) return;
-  canvas.width  = 240;
-  canvas.height = 300;
-  const W = 240, cx = W / 2;
-  const ctx = canvas.getContext('2d');
-
-  const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  ctx.fillStyle = isDark ? '#2a2a28' : '#f0ede8';
-  ctx.fillRect(0, 0, W, 300);
-  ctx.strokeStyle = isDark ? '#6a6a64' : '#a09890';
-  ctx.lineWidth = 1.5; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-
-  if (mode === 'body') {
-    ctx.beginPath(); ctx.ellipse(cx, 50, 20, 26, 0, 0, Math.PI*2); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(cx-8,76); ctx.lineTo(cx-8,88); ctx.moveTo(cx+8,76); ctx.lineTo(cx+8,88); ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(cx-45,100); ctx.quadraticCurveTo(cx-25,90,cx-8,90);
-    ctx.moveTo(cx+8,90); ctx.quadraticCurveTo(cx+25,90,cx+45,100); ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(cx-45,100); ctx.lineTo(cx-38,162); ctx.moveTo(cx+45,100); ctx.lineTo(cx+38,162);
-    ctx.moveTo(cx-38,162); ctx.lineTo(cx,166); ctx.lineTo(cx+38,162); ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(cx-20,166); ctx.lineTo(cx-22,248); ctx.moveTo(cx+20,166); ctx.lineTo(cx+22,248); ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(cx-45,100); ctx.lineTo(cx-55,168); ctx.moveTo(cx+45,100); ctx.lineTo(cx+55,168); ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(cx-22,248); ctx.lineTo(cx-30,256); ctx.moveTo(cx+22,248); ctx.lineTo(cx+30,256); ctx.stroke();
-    ctx.fillStyle = isDark ? '#7a7a74' : '#a09890';
-    ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('Полный рост, прямо', cx, 282);
-  } else {
-    ctx.beginPath(); ctx.ellipse(cx,128,62,82,0,0,Math.PI*2); ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(cx-44,90); ctx.quadraticCurveTo(cx-28,84,cx-14,88);
-    ctx.moveTo(cx+14,88); ctx.quadraticCurveTo(cx+28,84,cx+44,90); ctx.stroke();
-    ctx.beginPath();
-    ctx.ellipse(cx-26,108,14,9,0,0,Math.PI*2); ctx.ellipse(cx+26,108,14,9,0,0,Math.PI*2); ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(cx-26,108,4,0,Math.PI*2); ctx.arc(cx+26,108,4,0,Math.PI*2); ctx.fill();
-    ctx.beginPath();
-    ctx.moveTo(cx,120); ctx.lineTo(cx-10,148); ctx.quadraticCurveTo(cx,152,cx+10,148); ctx.stroke();
-    ctx.beginPath(); ctx.arc(cx,166,16,0.12*Math.PI,0.88*Math.PI); ctx.stroke();
-    ctx.fillStyle = isDark ? '#7a7a74' : '#a09890';
-    ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('Анфас, дневной свет', cx, 282);
-  }
-}
 
 /* ── File pick ── */
 function setupFilePicker(n) {
@@ -100,7 +42,6 @@ function updateButton() {
   document.getElementById('gobtn').disabled = !(files[1] && files[2]);
 }
 
-/* ── Convert file to base64 ── */
 function toBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -119,22 +60,35 @@ async function analyze() {
   try {
     const [data1, data2] = await Promise.all([toBase64(files[1]), toBase64(files[2])]);
 
-    const systemPrompt = `Ты эксперт по методу Кибби. Проанализируй фото (полный рост + лицо) и определи ОДИН из 6 типов по классической системе Кибби: Dramatic, Soft Dramatic, Natural, Classic, Gamine, Romantic.
-Отвечай ТОЛЬКО в формате JSON без markdown-обёрток и без пояснений. Структура:
+    const systemPrompt = `Ты эксперт-стилист по методу Кибби. Проанализируй два фото (полный рост + лицо) и определи ОДИН из 6 типов: Dramatic, Soft Dramatic, Natural, Classic, Gamine, Romantic.
+
+Отвечай ТОЛЬКО в формате JSON без markdown. Структура:
 {
-  "type": "название типа на английском",
+  "type": "название на английском",
   "type_ru": "название на русском",
-  "subtitle": "1 предложение — суть этого типа, тепло и понятно",
-  "features": "2-3 предложения о том, что видно на этих конкретных фото — линии тела, черты лица",
-  "style": ["что идёт 1", "что идёт 2", "что идёт 3", "что идёт 4"],
+  "subtitle": "1 тёплое предложение — суть этого типа",
+  "features": "2-3 предложения о конкретных чертах, видимых на этих фото",
+  "style_names": ["Название стиля 1", "Название стиля 2", "Название стиля 3"],
+  "style": ["конкретная рекомендация 1", "конкретная рекомендация 2", "конкретная рекомендация 3", "конкретная рекомендация 4"],
+  "outfit_refs": [
+    {"title": "Образ 1", "desc": "короткое описание образа — ткани, силуэт, детали"},
+    {"title": "Образ 2", "desc": "короткое описание образа"},
+    {"title": "Образ 3", "desc": "короткое описание образа"},
+    {"title": "Образ 4", "desc": "короткое описание образа"}
+  ],
   "avoid": ["что избегать 1", "что избегать 2", "что избегать 3"],
-  "celebs": ["Имя Фамилия (ж)", "Имя Фамилия (ж)", "Имя Фамилия (м)", "Имя Фамилия (м)", "Имя Фамилия"]
-}
-Если не можешь уверенно определить по фото — дай наиболее вероятный тип и отметь это в subtitle.`;
+  "celebs": [
+    {"name": "Имя Фамилия", "note": "актриса / певица / etc"},
+    {"name": "Имя Фамилия", "note": "актриса / певица / etc"},
+    {"name": "Имя Фамилия", "note": "актёр / музыкант / etc"},
+    {"name": "Имя Фамилия", "note": "актёр / музыкант / etc"},
+    {"name": "Имя Фамилия", "note": "модель / etc"}
+  ]
+}`;
 
     const requestBody = {
       model: 'claude-haiku-4-5-20251001',
-      max_tokens: 1000,
+      max_tokens: 1500,
       system: systemPrompt,
       messages: [{
         role: 'user',
@@ -147,14 +101,12 @@ async function analyze() {
     };
 
     let response;
-
     if (IS_LOCAL) {
-      /* Локальный режим: прямой запрос в Anthropic с ключом из браузера */
       const apiKey = getLocalApiKey();
       if (!apiKey) {
         document.getElementById('ldiv').classList.remove('on');
         document.getElementById('main-section').style.display = '';
-        document.getElementById('errmsg').textContent = 'API-ключ не введён. Обновите страницу и попробуйте снова.';
+        document.getElementById('errmsg').textContent = 'API-ключ не введён.';
         return;
       }
       response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -167,12 +119,8 @@ async function analyze() {
         },
         body: JSON.stringify(requestBody),
       });
-      /* Если ключ неверный — очистить, чтобы при следующей попытке запросить снова */
-      if (response.status === 401 || response.status === 403) {
-        localStorage.removeItem('kibbe_api_key');
-      }
+      if (response.status === 401 || response.status === 403) localStorage.removeItem('kibbe_api_key');
     } else {
-      /* Режим Vercel: запрос на серверный прокси — ключ на сервере */
       response = await fetch('/api/analyze', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -198,14 +146,75 @@ async function analyze() {
 /* ── Render result ── */
 function renderResult(r) {
   document.getElementById('ldiv').classList.remove('on');
-  document.getElementById('rname').textContent  = r.type + ' · ' + r.type_ru;
-  document.getElementById('rsub').textContent   = r.subtitle;
-  document.getElementById('rfeat').textContent  = r.features;
-  document.getElementById('rstyle').innerHTML   = r.style.map(s => `<li>${s}</li>`).join('');
-  document.getElementById('ravoid').innerHTML   = r.avoid.map(a => `<li>${a}</li>`).join('');
-  document.getElementById('rcelebs').innerHTML  = r.celebs.map(c => `<span class="celeb">${c}</span>`).join('');
+
+  document.getElementById('rname').textContent = r.type + ' · ' + r.type_ru;
+  document.getElementById('rsub').textContent  = r.subtitle;
+  document.getElementById('rfeat').textContent = r.features;
+
+  // Теги стилей
+  document.getElementById('rstyle-names').innerHTML =
+    (r.style_names || []).map(s => `<span class="style-tag">${s}</span>`).join('');
+
+  // Рекомендации
+  document.getElementById('rstyle').innerHTML =
+    r.style.map(s => `<li>${s}</li>`).join('');
+
+  // Референсы образов
+  document.getElementById('rrefs').innerHTML =
+    (r.outfit_refs || []).map(ref => `
+      <div class="ref-card">
+        <div class="ref-icon"><i class="ti ti-shirt"></i></div>
+        <div class="ref-body">
+          <div class="ref-title">${ref.title}</div>
+          <div class="ref-desc">${ref.desc}</div>
+        </div>
+      </div>`).join('');
+
+  // Избегать
+  document.getElementById('ravoid').innerHTML =
+    r.avoid.map(a => `<li>${a}</li>`).join('');
+
+  // Знаменитости с поиском фото
+  const celebsEl = document.getElementById('rcelebs');
+  celebsEl.innerHTML = (r.celebs || []).map((c, i) => `
+    <div class="celeb-card" id="celeb-${i}">
+      <div class="celeb-img-wrap">
+        <img class="celeb-img" src="" alt="${c.name}"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+          style="display:none" />
+        <div class="celeb-placeholder"><i class="ti ti-user"></i></div>
+      </div>
+      <div class="celeb-name">${c.name}</div>
+      <div class="celeb-note">${c.note}</div>
+    </div>`).join('');
+
+  // Загружаем фото знаменитостей через Wikipedia API
+  (r.celebs || []).forEach((c, i) => loadCelebPhoto(c.name, i));
+
   document.getElementById('rdiv').classList.add('on');
   document.getElementById('rdiv').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ── Загрузка фото знаменитостей через Wikipedia ── */
+async function loadCelebPhoto(name, idx) {
+  try {
+    const encoded = encodeURIComponent(name.split('(')[0].trim());
+    const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encoded}`;
+    const res = await fetch(url);
+    if (!res.ok) return;
+    const data = await res.json();
+    const thumb = data.thumbnail?.source;
+    if (!thumb) return;
+    const card = document.getElementById(`celeb-${idx}`);
+    if (!card) return;
+    const img = card.querySelector('.celeb-img');
+    const placeholder = card.querySelector('.celeb-placeholder');
+    img.src = thumb;
+    img.style.display = 'block';
+    if (placeholder) placeholder.style.display = 'none';
+  } catch (e) {
+    // тихо — просто остаётся placeholder
+  }
 }
 
 /* ── Reset ── */
@@ -226,14 +235,9 @@ function reset() {
 
 /* ── Init ── */
 document.addEventListener('DOMContentLoaded', () => {
-  drawExample('ex1', 'body');
-  drawExample('ex2', 'face');
   setupFilePicker(1);
   setupFilePicker(2);
   document.getElementById('gobtn').addEventListener('click', analyze);
   document.getElementById('resetbtn').addEventListener('click', reset);
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-    drawExample('ex1', 'body');
-    drawExample('ex2', 'face');
-  });
+
 });
